@@ -2,12 +2,13 @@ h2. This coupon code example is created by the Community/Developer Evangelism gr
 
 h1. Coupon Code
 
-You'll need to login to www.paypal.com to create your hosted buttons.
+You'll need to login to www.paypal.com to create your non-hosted buttons.
 
-* Create a buy now button at full price and use that as your default hostedButtonId by assigning it to the $hostedButtonId variable.
+* Create a buy now button at full price and use that as your default.
+* Set the $business value as the email address of your PayPal account.
 * Set The default full price by assigning it to the $amount variable this should match the price for the button you just created at paypal.com
 * Create additional buttons at www.paypal.com and apply discounts through the HTML Variables.  See our screencast on how to apply discounts with HTML variables.
-* Add the hostedButtonIds for the discount button to the array. Also, add the discount amount.  
+* Add the appropriate discount amounts to the array.  
 * Note, this example is using a fixed discount amount.
 * If you want to use a percentage discount, update this code $amount = ($amount - $discount) to $amount = ($amount - ($amount * .$discount));
 
@@ -15,19 +16,18 @@ You'll need to login to www.paypal.com to create your hosted buttons.
 <pre>
 &lt;?php
 
-	$hostedButtonId = "";
-	$amount = 0;
+	$business = "";
+	$amount = 1;
 
 	$arr = array(
-	"take5" => array("hostedButtonId" => "", "discount" => "5"),
-	"take10" => array("hostedButtonId" => "", "discount" => "10")
+	"take5" => array("discount" => "0.50"),
+	"take10" => array("discount" => "0.75")
 	);
 
 	foreach ($arr as $key => $value) {
 
 		if ($key == $_POST["couponCode"])
 		{
-			$hostedButtonId = $value["hostedButtonId"];
 			$discount = $value["discount"];
 			$amount = ($amount - $discount);
 			break;
